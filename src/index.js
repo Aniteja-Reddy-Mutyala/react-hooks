@@ -1,19 +1,35 @@
-import React, { useEffect, useState,useReducer } from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React, { useEffect, useState, useReducer } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
 
-function App(){
- const [checked,toggle]=useReducer((checked)=>!checked,false)
- return (
-  <>
-  <input type="checkbox" value={checked} onChange={toggle}/>
-  {checked?"checked":"not checked"}
-  </>
- )
+function App() {
+  const initialState = {
+    message: "Hi",
+  };
+  function reducer(state, action) {
+    switch (action.type) {
+      case "yell":
+        return {
+          message: `HEY!!! I just said ${state.message}`,
+        };
+        case "whispering":
+          return {
+            message:`excuse me. I just said ${state.message}`
+          }
+    }
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      <p>Message:{state.message}</p>
+      <button onClick={()=>dispatch({type:"yell"})}>YELL</button>
+      <button onClick={()=>dispatch({type:"whispering"})}>Whisper</button>
+    </>
+  );
 }
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />

@@ -1,31 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 
 function App(){
-  const [data,setData]=useState([])
-  useEffect(()=>{
-    fetch("https://api.github.com/users").
-    then((response)=>response.json()).
-    then(setData)
-  },[]);
-
-  if(data){
-    return (
-    <>
-    <ul>
-      {data.map((user)=>(
-      <li key={user.id}>{user.login} </li>
-      ))}
-    </ul>
-    <button onClick={()=>{setData([])}}>Empty the page</button>
-    </>
-  )
-
-  
-}
+ const [checked,toggle]=useReducer((checked)=>!checked,false)
+ return (
+  <>
+  <input type="checkbox" value={checked} onChange={toggle}/>
+  {checked?"checked":"not checked"}
+  </>
+ )
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

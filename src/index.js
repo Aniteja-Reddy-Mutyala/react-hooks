@@ -1,28 +1,33 @@
-import React, { useEffect, useState, useReducer,useRef } from "react";
+import React, { useEffect, useState, useReducer, useRef } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 
 function App() {
-  const sound=useRef();
-  const color=useRef();
-  const submit= (e)=>{
+  const [sound, setSound] = useState("");
+  const [color, setColor] = useState("#000000");
+  const submit = (e) => {
     e.preventDefault();
-    const soundVal=sound.current.value;
-    const colorVal=color.current.value;
-    alert(`${soundVal} sounds liks ${colorVal}`)
-    sound.current.value="";
-    color.cuurent.value="";
-
-  }
+    alert(`${sound} sounds liks ${color}`);
+    setSound("");
+    setColor("#000000");
+  };
   return (
     <>
       <form onSubmit={submit}>
-        <input ref={sound}type="text" placeholder="Sound....">
-        </input>
-       <input ref={color}type="color"/>
-       <button>Add</button>
+        <input
+          value={sound}
+          type="text"
+          placeholder="Sound...."
+          onChange={(e) => setSound(e.target.value)}
+        ></input>
+        <input
+          value={color}
+          type="color"
+          onChange={(e) => setColor(e.target.value)}
+        />
+        <button>Add</button>
       </form>
     </>
   );

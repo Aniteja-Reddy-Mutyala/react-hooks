@@ -1,13 +1,17 @@
-
+import { useContext } from 'react';
 import './App.css';
-
-function App({name}) {
+import { TreesContext } from '.';
+function App() {
+  const {trees}=useContext(TreesContext)
   return (
-    <div className="App">
-      <h1>
-        Welcome to hello world {name}
-      </h1>
-    </div>
+    <>
+      <h1>The trees I have heard of</h1>
+      <ul>
+        {trees.map((tree)=>(
+          <li key={tree.id}>{tree.type}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 

@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+import reportWebVitals from './reportWebVitals';
+function App(){
+ const [checked,setChecked]=useState(false)
+  return (
+    <>
+    <div>
+      <input type="checkbox" value={checked} onChange={()=>setChecked((checked)=>!checked)}/>
+      <p>{checked?"checked":"not checked"}</p>
+    </div>
+    </>
+  )
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App name="Aniteja" />
+    <App />
   </React.StrictMode>
 );
 
